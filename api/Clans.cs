@@ -27,6 +27,7 @@ namespace COC_Clan_Member_Evaluator.api
                 throw new NestedException(nameof(Clans), nameof(GetClanAsync), "获取部落信息失败。", ex);
             }
         }
+
         public static async Task<ClanWar> GetWarAsync(string clanTag)
         {
             try
@@ -36,7 +37,21 @@ namespace COC_Clan_Member_Evaluator.api
             }
             catch (Exception ex)
             {
-                throw new NestedException(nameof(Clans), nameof(GetWarAsync), "获取部落战争信息失败。", ex);
+                throw new NestedException(nameof(Clans), nameof(GetWarAsync), "获取部落战信息失败。", ex);
+            }
+        }
+
+        public static async Task<ClanCapitalRaidSeason?> GetRaidAsync(string clanTag)
+        {
+            try
+            {
+                string jsonString = await Client.GetAsync(_raidPath, clanTag);
+                var obj = JsonSerializer.Deserialize<ClanCapitalRaidSeasons>(jsonString) ?? throw JsonHelper.NullDeserialization;
+                return obj.Items.Count > 0 ? obj.Items[0] : null;
+            }
+            catch (Exception ex)
+            {
+                throw new NestedException(nameof(Clans), nameof(GetWarAsync), "获取都城突袭信息失败。", ex);
             }
         }
     }
