@@ -27,7 +27,8 @@ namespace COC_Clan_Member_Evaluator
                 List<Task> tasks = [];
                 //tasks.Add(TestGetPlayer(Wonderland));
                 //tasks.Add(TestVerifyPlayer(Wonderland, "r87jf2sf"));
-                tasks.Add(TestGetClan(空部落));
+                //tasks.Add(TestGetClan(艾欧尼翁));
+                //tasks.Add(TestGetWar(艾欧尼翁));
                 Task.WhenAll(tasks).Wait();
             }
             catch (TypeInitializationException ex)
@@ -60,6 +61,12 @@ namespace COC_Clan_Member_Evaluator
         {
             var getClan = await Clans.GetClanAsync(clanTag);
             File.WriteAllText($@"{nameof(TestGetClan)}_{clanTag}.json", getClan.ToJsonString());
+        }
+
+        static async Task TestGetWar(string clanTag)
+        {
+            var getClan = await Clans.GetWarAsync(clanTag);
+            File.WriteAllText($@"{nameof(TestGetWar)}_{clanTag}.json", getClan.ToJsonString());
         }
     }
 }

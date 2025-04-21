@@ -1,48 +1,81 @@
-﻿using System.Text.Json.Serialization;
+﻿using COC_Clan_Member_Evaluator.api.common;
+using System.Text.Json.Serialization;
 
 namespace COC_Clan_Member_Evaluator.api.clans
 {
     internal class WarClan
     {
-        string? tag;
-        string? name;
-        int clanLevel;
-        int attacks;
-        ClanWarMemberList? members;
+        private float _destruptionPercentage;
+        private string? _tag;
+        private string? _name;
+        private BadgeUrls? _badgeUrls;
+        private int _clanLevel;
+        private int _attacks;
+        private int _stars;
+        private int? _expEarned;
+        private ClanWarMemberList? _members;
+
+        [JsonPropertyName("destructionPercentage")]
+        public float DestruptionPercentage
+        {
+            get => _destruptionPercentage;
+            init => _destruptionPercentage = value;
+        }
 
         [JsonPropertyName("tag")]
-        public string Tag
+        public string? Tag
         {
-            get => tag ?? "";
-            init => tag = value;
+            get => _tag;
+            init => _tag = value;
         }
 
         [JsonPropertyName("name")]
-        public string Name
+        public string? Name
         {
-            get => name ?? "";
-            init => name = value;
+            get => _name;
+            init => _name = value;
+        }
+
+        [JsonPropertyName("badgeUrls")]
+        public BadgeUrls BadgeUrls
+        {
+            get => _badgeUrls ?? throw new NullPropertyException(nameof(WarClan), nameof(BadgeUrls));
+            init => _badgeUrls = value;
         }
 
         [JsonPropertyName("clanLevel")]
         public int ClanLevel
         {
-            get => clanLevel;
-            init => clanLevel = value;
+            get => _clanLevel;
+            init => _clanLevel = value;
         }
 
         [JsonPropertyName("attacks")]
         public int Attacks
         {
-            get => attacks;
-            init => attacks = value;
+            get => _attacks;
+            init => _attacks = value;
+        }
+
+        [JsonPropertyName("stars")]
+        public int Stars
+        {
+            get => _stars;
+            init => _stars = value;
+        }
+
+        [JsonPropertyName("expEarned")]
+        public int? ExpEarned
+        {
+            get => _expEarned;
+            init => _expEarned = value;
         }
 
         [JsonPropertyName("members")]
-        public ClanWarMemberList Members
+        public ClanWarMemberList? Members
         {
-            get => members ?? [];
-            init => members = value;
+            get => _members;
+            init => _members = value;
         }
     }
 }

@@ -4,77 +4,77 @@ namespace COC_Clan_Member_Evaluator.api.clans
 {
     internal class ClanWar
     {
-        WarClan? clan;
-        int teamSize;
-        int attacksPerMember;
-        BattleModifier? battleModifier;
-        WarClan? opponent;
-        string? startTime;
-        WarState state;
-        string? endTime;
-        string? preparationStartTime;
+        private WarClan? _clan;
+        private int? _teamSize;
+        private int? _attacksPerMember;
+        private BattleModifier? _battleModifier;
+        private WarClan? _opponent;
+        private string? _startTime;
+        private WarState _state;
+        private string? _endTime;
+        private string? _preparationStartTime;
 
         [JsonPropertyName("clan")]
-        public WarClan? Clan
+        public WarClan Clan
         {
-            get => clan;
-            init => clan = value;
+            get => _clan ?? throw new NullPropertyException(nameof(ClanWar), nameof(Clan));
+            init => _clan = value;
         }
 
         [JsonPropertyName("teamSize")]
-        public int TeamSize
+        public int? TeamSize
         {
-            get => teamSize;
-            init => teamSize = value;
+            get => _teamSize;
+            init => _teamSize = value;
         }
 
         [JsonPropertyName("attacksPerMember")]
-        public int AttacksPerMember
+        public int? AttacksPerMember
         {
-            get => attacksPerMember;
-            init => attacksPerMember = value;
+            get => _attacksPerMember;
+            init => _attacksPerMember = value;
         }
 
         [JsonPropertyName("battleModifier")]
         public BattleModifier? BattleModifier
         {
-            get => battleModifier;
-            init => battleModifier = value;
+            get => _battleModifier;
+            init => _battleModifier = value;
         }
 
         [JsonPropertyName("opponent")]
         public WarClan Opponent
         {
-            get => opponent ?? new();
-            init => opponent = value;
+            get => _opponent ?? throw new NullPropertyException(nameof(ClanWar), nameof(Opponent));
+            init => _opponent = value;
         }
 
         [JsonPropertyName("startTime")]
-        public string StartTime
+        public string? StartTime
         {
-            get => startTime ?? "";
-            init => startTime = value;
+            get => _startTime;
+            init => _startTime = value;
         }
 
         [JsonPropertyName("state")]
         public WarState State
         {
-            get => state;
-            init => state = value;
+            get => _state;
+            init => _state = value;
         }
 
         [JsonPropertyName("endTime")]
-        public string EndTime
+        public string? EndTime
         {
-            get => endTime ?? "";
-            init => endTime = value;
+            get => _endTime;
+            init => _endTime = value;
         }
 
         [JsonPropertyName("preparationStartTime")]
-        public string PreparationStartTime
+        public string? PreparationStartTime
         {
-            get => preparationStartTime ?? "";
-            init => preparationStartTime = value;
+            get => _preparationStartTime;
+            init => _preparationStartTime = value;
         }
     }
 }
