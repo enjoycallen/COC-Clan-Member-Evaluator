@@ -7,7 +7,7 @@
         private string? _type;
 
         [JsonPropertyName("id")]
-        public int Id
+        public int ID
         {
             get => _id;
             set => _id = value;

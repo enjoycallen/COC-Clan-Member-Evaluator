@@ -1,5 +1,4 @@
-﻿using COC_Clan_Member_Evaluator.api.common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

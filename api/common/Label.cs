@@ -16,7 +16,7 @@
         }
 
         [JsonPropertyName("id")]
-        public int Id
+        public int ID
         {
             get => _id;
             init => _id = value;

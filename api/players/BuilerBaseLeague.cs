@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace COC_Clan_Member_Evaluator.api.common
+namespace COC_Clan_Member_Evaluator.api.players
 {
     internal class BuilerBaseLeague
     {

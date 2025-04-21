@@ -18,12 +18,16 @@ namespace COC_Clan_Member_Evaluator
             var Hikari = "#GGU2PUPLC";
             var Mio = "#GCJG9GJC9";
 
+            var 艾欧尼翁 = "#2RRPJC98L";
+            var 科维斯 = "#2JQ88G9G2";
+            var 空部落 = "#2RR0LJCRU";
+
             try
             {
                 List<Task> tasks = [];
-                tasks.Add(TestGetPlayer(Wonderland));
-                tasks.Add(TestVerifyPlayer(Wonderland, "r87jf2sf"));
-
+                //tasks.Add(TestGetPlayer(Wonderland));
+                //tasks.Add(TestVerifyPlayer(Wonderland, "r87jf2sf"));
+                tasks.Add(TestGetClan(空部落));
                 Task.WhenAll(tasks).Wait();
             }
             catch (TypeInitializationException ex)
@@ -50,6 +54,12 @@ namespace COC_Clan_Member_Evaluator
         {
             var verifyPlayer = await Players.VerifyPlayerAsync(playerTag, token);
             File.WriteAllText($@"{nameof(TestVerifyPlayer)}_{playerTag}.json", verifyPlayer.ToString());
+        }
+
+        static async Task TestGetClan(string clanTag)
+        {
+            var getClan = await Clans.GetClanAsync(clanTag);
+            File.WriteAllText($@"{nameof(TestGetClan)}_{clanTag}.json", getClan.ToJsonString());
         }
     }
 }

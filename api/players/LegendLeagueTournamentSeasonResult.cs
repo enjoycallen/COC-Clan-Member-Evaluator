@@ -1,4 +1,4 @@
-﻿namespace COC_Clan_Member_Evaluator.api.common
+﻿namespace COC_Clan_Member_Evaluator.api.players
 {
     internal class LegendLeagueTournamentSeasonResult
     {

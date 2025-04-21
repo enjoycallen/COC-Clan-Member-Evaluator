@@ -1,6 +1,4 @@
-﻿using COC_Clan_Member_Evaluator.api.common;
-
-namespace COC_Clan_Member_Evaluator.api.players
+﻿namespace COC_Clan_Member_Evaluator.api.players
 {
     internal class PlayerLegendStatistics
     {
