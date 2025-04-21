@@ -1,6 +1,4 @@
-﻿using COC_Clan_Member_Evaluator.api.clans;
-using COC_Clan_Member_Evaluator.api.players;
-using System.Diagnostics;
+﻿using COC_Clan_Member_Evaluator.api;
 
 namespace COC_Clan_Member_Evaluator
 {
@@ -16,58 +14,42 @@ namespace COC_Clan_Member_Evaluator
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-            var playerQuery = Task.Run(() =>
-            {
-                var Wonderland = "#GGGJ088L8";
-                var Hikari = "#GGU2PUPLC";
-                var 修尔克 = "#GR0L0GUR8";
-                var 菲奥伦 = "#GGGJ088L8";
-                try
-                {
-                    var player = Players.GetPlayer(Hikari);
-                    File.WriteAllText(@"D:\Game\COC\API test\player.json", player.Result.ToJsonString());
-                }
-                catch (TypeInitializationException ex)
-                {
-                    MessageBox.Show(ex.InnerException?.Message, "错误", default, MessageBoxIcon.Error);
-                }
-                catch (AggregateException ex)
-                {
-                    MessageBox.Show(ex.InnerException?.Message, "错误", default, MessageBoxIcon.Error);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "错误", default, MessageBoxIcon.Error);
-                }
-            });
+            var Wonderland = "#GP8YQYYYQ";
+            var Hikari = "#GGU2PUPLC";
+            var Mio = "#GCJG9GJC9";
 
-            var ClanQuery = Task.Run(() =>
+            try
             {
-                var testClan = "#2GUVCQYQC";
-                var 科维斯 = "#2JQ88G9G2";
-                var 艾欧尼翁 = "#2RRPJC98L";
-                try
-                {
-                    var clan = Clans.GetClan(艾欧尼翁);
-                    File.WriteAllText(@"D:\Game\COC\API test\clan.json", clan.Result.ToJsonString());
-                    //var clanWar = Clans.GetClanWar(艾欧尼翁);
-                    //File.WriteAllText(@"D:\Game\COC\API test\clanWar.json", clanWar.Result.ToJsonString());
-                }
-                catch (TypeInitializationException ex)
-                {
-                    MessageBox.Show(ex.InnerException?.Message, "错误", default, MessageBoxIcon.Error);
-                }
-                catch (AggregateException ex)
-                {
-                    MessageBox.Show(ex.InnerException?.Message, "错误", default, MessageBoxIcon.Error);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "错误", default, MessageBoxIcon.Error);
-                }
+                List<Task> tasks = [];
+                tasks.Add(TestGetPlayer(Wonderland));
+                tasks.Add(TestVerifyPlayer(Wonderland, "r87jf2sf"));
 
-            });
-            Task.WhenAll(playerQuery, ClanQuery).Wait();
+                Task.WhenAll(tasks).Wait();
+            }
+            catch (TypeInitializationException ex)
+            {
+                MessageBox.Show(ex.InnerException?.Message, "错误", default, MessageBoxIcon.Error);
+            }
+            catch (AggregateException ex)
+            {
+                MessageBox.Show(ex.InnerException?.Message, "错误", default, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "错误", default, MessageBoxIcon.Error);
+            }
+        }
+
+        static async Task TestGetPlayer(string playerTag)
+        {
+            var getPlayer = await Players.GetPlayerAsync(playerTag);
+            File.WriteAllText($@"{nameof(TestGetPlayer)}_{playerTag}.json", getPlayer.ToJsonString());
+        }
+
+        static async Task TestVerifyPlayer(string playerTag, string token)
+        {
+            var verifyPlayer = await Players.VerifyPlayerAsync(playerTag, token);
+            File.WriteAllText($@"{nameof(TestVerifyPlayer)}_{playerTag}.json", verifyPlayer.ToString());
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace COC_Clan_Member_Evaluator.api
+namespace COC_Clan_Member_Evaluator.api.common
 {
     [JsonConverter(typeof(JsonStringEnumConverter))]
     internal enum BattleModifier
